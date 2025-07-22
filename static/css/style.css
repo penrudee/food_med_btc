@@ -1,0 +1,226 @@
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    line-height: 1.6;
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid #333;
+}
+
+header h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+header p {
+    font-size: 16px;
+    color: #aaaaaa;
+}
+
+/* Link Navigation */
+.links {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.links a {
+    color: #bb86fc;
+    text-decoration: none;
+    margin: 0 15px;
+    padding: 5px 0;
+    font-size: 16px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+}
+
+.links a:hover {
+    border-bottom: 1px solid #bb86fc;
+}
+
+/* Search Bar */
+.search-container {
+    display: flex;
+    margin-bottom: 20px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid #333;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border-radius: 4px 0 0 4px;
+    font-size: 16px;
+}
+
+.search-button {
+    padding: 10px 20px;
+    background-color: #bb86fc;
+    color: #000000;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* Table Styles */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+th {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.product-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* Price Styles */
+.price-up {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.price-down {
+    color: #F44336;
+    font-weight: bold;
+}
+
+.price-stable {
+    color: #9E9E9E;
+}
+
+.available {
+    color: #4CAF50;
+}
+
+.not-available {
+    color: #F44336;
+}
+.pre-order {
+    color: #ffab40; /* สีส้มเพื่อแยกความแตกต่าง */
+}
+.responsive-textarea {
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid #333;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #aaaaaa;
+}
+
+.footer-links {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #bb86fc;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    th, td {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+    
+    .product-img {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .links a {
+        margin: 0 10px;
+        font-size: 14px;
+    }
+    .responsive-textarea {
+        width: 100%;
+        max-width: none; /* ยกเลิกความกว้างสูงสุดบนมือถือ */
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 20px;
+    }
+    
+    header p {
+        font-size: 14px;
+    }
+    
+    .search-input, .search-button {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+    
+    th, td {
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+    
+    .product-img {
+        width: 30px;
+        height: 30px;
+    }
+    .responsive-textarea {
+        width: 100%;
+        max-width: none; /* ยกเลิกความกว้างสูงสุดบนมือถือ */
+    }
+}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Name</th>
+                <th>Price (BTC)</th>
+                <th>Price (THB)</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>
+                    {% if product.__class__.__name__ == 'Medicine' %}
+                    💊
+                    {% else %}
+                    🍎
+                    {% endif %}
+                </td>
+                <td>{{ product.name }}</td>
+                <td class="price-{{ product.price_trend }}">
+                    {{ "%.8f"|format(product.btc_price) }} 
+                    {% if product.price_trend == 'up' %}↑
+                    {% elif product.price_trend == 'down' %}↓
+                    {% endif %}
+                </td>
+                <td>{{ product.price_thb }}</td>
+                <td class="{% if product.status.value == 'available' %}available{% else %}not-available{% endif %}">
+                    {{ product.status.value }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="{{url_for('post_add_food')}}" method="post">
+    {{form.hidden_tag()}}
+    <p>
+        {{form.name.label}} 
+        {{form.name(class="form-control")}}
+    </p>
+    <p>
+        {{form.detail.label}}
+        {{form.detail(class="form-control")}}
+    </p>
+    <p>
+        {{form.unit.label}}
+        {{form.unit(class="form-control")}}
+
+    </p>
+    <p>
+        {{form.price_thb.label}}
+        {{form.price_thb(class="form-control")}}
+    </p>
+    <p>
+        {{form.status.label}}
+        {{form.status(class="form-control")}}
+    </p>
+    <p>
+        {{form.submit(class="btn btn-primary")}}
+    </p>
+</form>
+{% endblock %}

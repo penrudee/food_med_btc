@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onion Market - Medicine & Food</title>
+    <link rel="stylesheet" href="{{url_for('static',filename ='css/style.css')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <title>{{title}}-Pharmbook</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Welcome to Onion Market</h1>
+            <p>Your trusted source for quality medicine and food products</p>
+        </header>
+
+        <div class="links">
+            <a href="{{url_for('medicine')}}">Medicines</a>
+            <a href="{{url_for('food')}}">Food</a>
+            <a href="{{url_for('contact')}}">Contact</a>
+            {% if current_user.is_anonymous %}
+            <a href="{{url_for('login')}}">Login</a>
+            {% else %}
+            <a href="{{url_for('add_med')}}">Add Med</a>
+            <a href="{{url_for('add_food')}}">Add Food</a>
+            <a href="{{url_for('logout')}}">Logout</a>
+            {% endif %}
+        </div>
+
+        <div class="search-container">
+            <input type="text" placeholder="Search products..." class="search-input">
+            <button class="search-button">Search</button>
+        </div>
+    </div>
+    <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    {% block content %} {% end block %}
+    
+    
+        <footer>
+            <div class="footer-links">
+                <a href="https://facebook.com/yourpage" target="_blank">Facebook Page</a>
+                <a href="disclaimer.html">Disclaimer</a>
+            </div>
+            <p>© 2023 Onion Market. All prices are approximate and may fluctuate.</p>
+        </footer>
+</body>
+</html>
