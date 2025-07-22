@@ -115,7 +115,14 @@ th {
     color: #ffffff;
     font-weight: 500;
 }
-
+.table-product-image {
+    max-width: 60px;  /* ขนาดสูงสุดบนหน้าจอใหญ่ */
+    max-height: 60px;
+    width: auto;      /* รักษาสัดส่วน */
+    height: auto;
+    border-radius: 4px; /* มุมโค้งเล็กน้อย */
+    object-fit: cover;  /* ตัดส่วนเกินของภาพ */
+}
 .product-img {
     width: 50px;
     height: 50px;
@@ -194,6 +201,11 @@ footer {
         width: 100%;
         max-width: none; /* ยกเลิกความกว้างสูงสุดบนมือถือ */
     }
+    /* สำหรับรูปภาพในตาราง */
+.table-product-image {
+        max-width: 40px;
+        max-height: 40px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -204,7 +216,10 @@ footer {
     header p {
         font-size: 14px;
     }
-    
+    .table-product-image {
+        max-width: 40px;
+        max-height: 40px;
+    }
     .search-input, .search-button {
         padding: 8px 12px;
         font-size: 14px;

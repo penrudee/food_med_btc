@@ -1,0 +1,31 @@
+{% extends 'detail_base.html' %}
+
+{% block content %}
+<!-- ส่วนแสดงรูปภาพ -->
+<div class="product-image-container">
+    <img src="{{ product.image }}" alt="{{ product.name }}" class="product-main-image">
+
+</div>
+
+<!-- ส่วนรายละเอียดสินค้า -->
+<div class="product-details">
+    <h1>{{ product.name }}</h1>
+
+    <div class="price-section">
+        <span class="current-price"> 
+        {{ "%.8f"|format(product.btc_price) }}
+        {% if product.price_trend == 'up' %}↑
+        {% elif product.price_trend == 'down' %}↓
+        {% endif %}
+        -BTC</span>
+        <span class="original-price">{{ product.price_thb }} THB</span>
+
+    </div>
+    <div class="product-description">
+        <h3>Description</h3>
+        <p>{{ product.detail }}</p>
+    </div>
+
+
+</div>
+{% endblock %}

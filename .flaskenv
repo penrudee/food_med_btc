@@ -1,0 +1,1 @@
+FLASK_APP=pharmbook_start.py

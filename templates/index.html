@@ -1,41 +1,117 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="table-container">
-    <table>
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Name</th>
-                <th>Price (BTC)</th>
-                <th>Price (THB)</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for product in products %}
-            <tr>
-                <td>
-                    {% if product.__class__.__name__ == 'Medicine' %}
-                    💊
-                    {% else %}
-                    🍎
+<div class="container mt-4">
+    <!-- ส่วนค้นหา -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <form action="{{ url_for('index') }}" method="get" class="search-form">
+                <div class="input-group">
+                    <input type="text" 
+                           name="q" 
+                           class="form-control" 
+                           placeholder="Search products by name..." 
+                           value="{{ request.args.get('q', '') }}">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="bi bi-search"></i> Search
+                    </button>
+                    {% if request.args.get('q') %}
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">
+                        <i class="bi bi-x-circle"></i> Clear
+                    </a>
                     {% endif %}
-                </td>
-                <td>{{ product.name }}</td>
-                <td class="price-{{ product.price_trend }}">
-                    {{ "%.8f"|format(product.btc_price) }} 
-                    {% if product.price_trend == 'up' %}↑
-                    {% elif product.price_trend == 'down' %}↓
-                    {% endif %}
-                </td>
-                <td>{{ product.price_thb }}</td>
-                <td class="{% if product.status.value == 'available' %}available{% else %}not-available{% endif %}">
-                    {{ product.status.value }}
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                </div>
+                <div class="mt-2">
+                    <small class="text-muted">
+                        Search results: {{ products|length }} items found
+                    </small>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4 text-end">
+            <div class="btn-group">
+                <a href="{{ url_for('foods') }}" class="btn btn-outline-success">🍎 All Foods</a>
+                <a href="{{ url_for('medicines') }}" class="btn btn-outline-danger">💊 All Medicines</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ตารางสินค้า -->
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Image</th>
+                    <th>Type</th>
+                    <th>Product Name</th>
+                    <th>Price (BTC)</th>
+                    <th>Price (THB)</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>
+                        <img src="{{ product.image or 'https://via.placeholder.com/80' }}" 
+                             class="img-thumbnail" 
+                             alt="{{ product.name }}"
+                             style="width: 80px; height: 80px; object-fit: cover;">
+                    </td>
+                    <td class="text-center">
+                        {% if product.__class__.__name__ == 'Medicine' %}
+                        <span class="badge bg-danger">💊</span>
+                        {% else %}
+                        <span class="badge bg-success">🍎</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ url_for('product_detail', product_id=product.id) }}" 
+                           class="text-decoration-none">
+                            {{ product.name }}
+                        </a>
+                        <div class="text-muted small">{{ product.detail|truncate(50) }}</div>
+                    </td>
+                    <td class="price-{{ product.price_trend }} fw-bold">
+                        {{ "%.8f"|format(product.btc_price) }} 
+                        {% if product.price_trend == 'up' %}
+                        <i class="bi bi-arrow-up-circle-fill text-danger"></i>
+                        {% elif product.price_trend == 'down' %}
+                        <i class="bi bi-arrow-down-circle-fill text-success"></i>
+                        {% endif %}
+                    </td>
+                    <td class="fw-bold">{{ "%.2f"|format(product.price_thb) }} THB</td>
+                    <td>
+                        <span class="badge 
+                            {% if product.status.value == 'available' %}bg-success
+                            {% elif product.status.value == 'pre-order' %}bg-warning text-dark
+                            {% elif product.status.value == 'special-order' %}bg-info text-dark
+                            {% else %}bg-secondary
+                            {% endif %}">
+                            {{ product.status.value|replace('-', ' ')|title }}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('product_detail', product_id=product.id) }}" 
+                           class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-eye-fill"></i> View
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7" class="text-center py-4">
+                        {% if request.args.get('q') %}
+                        No products found for "{{ request.args.get('q') }}"
+                        {% else %}
+                        No products available
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}
