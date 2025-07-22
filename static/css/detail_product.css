@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     background-color: #121212;
     color: #e0e0e0;
     line-height: 1.6;
@@ -218,13 +218,13 @@ body {
         float: left;
         padding-right: 30px;
     }
-    
+
     .product-details {
         width: 50%;
         float: right;
         padding-left: 30px;
     }
-    
+
     .container::after {
         content: "";
         display: table;
@@ -236,20 +236,20 @@ body {
     .product-main-image {
         max-height: 300px;
     }
-    
+
     .thumbnail {
         width: 60px;
         height: 60px;
     }
-    
+
     .product-details h1 {
         font-size: 20px;
     }
-    
+
     .current-price {
         font-size: 20px;
     }
-    
+
     .original-price {
         font-size: 16px;
     }
